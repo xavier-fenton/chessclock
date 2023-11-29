@@ -7,17 +7,18 @@ function App() {
   const [blackTime, setBlackTime] = useState(five_minutes)
 
   const [isActive, setIsActive] = useState(false)
-  const [activeTimer, setActiveTimer] = useState(null) // 'white' or 'black'
+  const [isWhite, setIsWhite] = useState(null) // 'white'
+  const [isBlack, setIsBlack] = useState(null) // 'white'
 
   useEffect(() => {
     let interval
 
     if (isActive) {
       interval = setInterval(() => {
-        if (activeTimer === 'white') {
+        if (isWhite === 'active') {
           setWhiteTime((prevWhiteTime) => prevWhiteTime - 1)
         }
-        if (activeTimer === 'black') {
+        if (isBlack === 'active') {
           setBlackTime((prevBlackTime) => prevBlackTime - 1)
         }
       }, 1000)
@@ -26,42 +27,45 @@ function App() {
     }
 
     return () => clearInterval(interval)
-  }, [isActive, activeTimer])
+  }, [isActive, isWhite, isBlack])
 
   function handleTimerClick(timer) {
-    if (!isActive) {
+    if (timer === 'black') {
       setIsActive(true)
-      setActiveTimer(timer)
-    } else {
-      setIsActive(false)
-      setActiveTimer('active')
+      setIsWhite('')
+      setIsBlack('active')
+    }
+    if (timer === 'white') {
+      setIsActive(true)
+      setIsWhite('active')
+      setIsBlack('')
     }
   }
 
-  const whitesMinutes = Math.floor(whiteTime / 60)
-  const whitesRemainingSeconds = whiteTime % 60
+  const whiteMinutes = Math.floor(whiteTime / 60)
+  const whiteRemainingSeconds = whiteTime % 60
 
-  const blacksMinutes = Math.floor(blackTime / 60)
-  const blacksRemainingSeconds = blackTime % 60
+  const blackMinutes = Math.floor(blackTime / 60)
+  const blackRemainingSeconds = blackTime % 60
 
   return (
     <div className="timer-wrapper">
       <div
-        className={`white-timer ${activeTimer === 'white' ? 'active' : ''}`}
+        className={`white-timer ${isWhite === '' ? 'white' : 'active'}`}
         onClick={() => handleTimerClick('white')}
       >
         <div>
-          {whitesMinutes} : {whitesRemainingSeconds}
+          {whiteMinutes} : {whiteRemainingSeconds}
           <br />
         </div>
       </div>
 
       <div
-        className={`black-timer ${activeTimer === 'black' ? 'active' : ''}`}
+        className={`black-timer ${isBlack === '' ? 'black' : 'active'}`}
         onClick={() => handleTimerClick('black')}
       >
         <div>
-          {blacksMinutes} : {blacksRemainingSeconds}
+          {blackMinutes} : {blackRemainingSeconds}
           <br />
         </div>
       </div>
