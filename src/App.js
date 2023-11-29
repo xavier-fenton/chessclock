@@ -8,7 +8,7 @@ function App() {
 
   const [isActive, setIsActive] = useState(false)
   const [isWhite, setIsWhite] = useState(null) // 'white'
-  const [isBlack, setIsBlack] = useState(null) // 'white'
+  const [isBlack, setIsBlack] = useState(null) // 'black'
 
   useEffect(() => {
     let interval
