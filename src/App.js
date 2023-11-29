@@ -65,7 +65,6 @@ function App() {
           <br />
         </div>
       </div>
-      {/* Additional UI components or actions based on your requirements */}
     </div>
   )
 }
