@@ -55,7 +55,7 @@ table {
   font-size: xx-large; 
 }
 
-.white-timer{
+.white-timer {
   display: flex;
     padding-left: 50%;
     padding-right: 50%;
@@ -67,6 +67,10 @@ table {
     cursor: pointer;
     width: 50%;
     justify-content: center;
+}
+
+.active{
+  background-color: blue;
 }
 .black-timer{
   display: flex;
